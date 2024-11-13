@@ -16,20 +16,9 @@ func smolid(b int) string {
 	if err != nil {
 		panic("couldn't read random bytes")
 	}
-	enc := base32.StdEncoding.WithPadding(base32.NoPadding)
+	enc := base32.NewEncoding("ABCDEFGHJKMNPRSTUVWXYZ23456789").WithPadding(base32.NoPadding)
 	id := enc.EncodeToString(buf)
 	return id
-}
-
-func wraptext(s string) string {
-	var out string
-	for i, c := range s {
-		out += string(c)
-		if i+1 == len(s)/2 {
-			out += "\r\n"
-		}
-	}
-	return out
 }
 
 func main() {
@@ -57,7 +46,6 @@ func main() {
 			id1 := smolid(3)
 			id2 := smolid(3)
 			id := id1 + id2
-			//id_split := wraptext(id)
 			fmt.Println(id1, id2)
 			qr, err := qrcode.Encode(id, qrcode.Highest, 100)
 			if err != nil {
