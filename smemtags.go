@@ -24,17 +24,17 @@ func smolid(b int) string {
 func main() {
 	pdf := fpdf.New("P", "mm", "A4", "")
 	pdf.AddPage()
-	pdf.SetMargins(0.0, 0.0, 0.0)
+	pdf.SetMargins(9.0, 14.0, 9.0)
 	pdf.SetFont("Courier", "", 10)
 
 	rows := 26
 	cols := 7
 	qrsize := 9.5
-	colspace := 2.95
+	colspace := 2.5
 	width := 25.4
 	height := 10.0
-	leftmargin := 9.0
-	topmargin := 13.0
+	leftmargin := 10.0
+	topmargin := 14.0
 
 	var opt fpdf.ImageOptions
 	opt.ImageType = "png"
@@ -54,11 +54,9 @@ func main() {
 
 			offset_x := leftmargin + float64(c)*(width+colspace)
 			offset_y := topmargin + float64(r)*height
-			text_x := offset_x + 13.0
-			text_y := offset_y
 
 			// put image on pdf
-			fmt.Printf("Placing (%f, %f), (%f, %f)\n", offset_x, offset_y, text_x, text_y)
+			fmt.Printf("Placing (%f, %f)\n", offset_x, offset_y)
 			_ = pdf.RegisterImageOptionsReader(id, opt, bytes.NewReader(qr))
 			pdf.SetXY(offset_x+qrsize, offset_y)
 			pdf.CellFormat(width-qrsize, height/2, id1, "0", 0, "CB", false, 0, "")
