@@ -25,9 +25,10 @@ func main() {
 	pdf := fpdf.New("P", "mm", "A4", "")
 	pdf.AddPage()
 	pdf.SetMargins(9.0, 14.0, 9.0)
+	pdf.SetAutoPageBreak(false, 14.0)
 	pdf.SetFont("Courier", "", 10)
 
-	rows := 26
+	rows := 27
 	cols := 7
 	qrsize := 9.5
 	colspace := 2.5
