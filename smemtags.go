@@ -16,7 +16,7 @@ func smolid(b int) string {
 	if err != nil {
 		panic("couldn't read random bytes")
 	}
-	enc := base32.NewEncoding("ABCDEFGHJKMNPRSTUVWXYZ23456789").WithPadding(base32.NoPadding)
+	enc := base32.NewEncoding("ABCDEFGHJKMNPQRSTUVWXYZ123456789").WithPadding(base32.NoPadding)
 	id := enc.EncodeToString(buf)
 	return id
 }
@@ -24,10 +24,10 @@ func smolid(b int) string {
 func main() {
 	pdf := fpdf.New("P", "mm", "A4", "")
 	pdf.AddPage()
-	//pdf.SetMargins(0.0, 0.0, 0.0)
+	pdf.SetMargins(0.0, 0.0, 0.0)
 	pdf.SetFont("Courier", "", 10)
 
-	rows := 25
+	rows := 26
 	cols := 7
 	qrsize := 9.5
 	colspace := 2.95
@@ -47,7 +47,7 @@ func main() {
 			id2 := smolid(3)
 			id := id1 + id2
 			fmt.Println(id1, id2)
-			qr, err := qrcode.Encode(id, qrcode.Highest, 100)
+			qr, err := qrcode.Encode(id, qrcode.Highest, 256)
 			if err != nil {
 				panic("couldn't encode qr")
 			}
