@@ -1,0 +1,3 @@
+magick IMG_1776.jpg -resize 800 -deskew 40% -fuzz 50% -trim +repage -quality 82 disk.jpg
+
+zbarimg disk.png
